@@ -4,75 +4,226 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Professional Portfolio</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    body {
+      background-color: #020617;
+      color: #ffffff;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .container {
+      max-width: 400px;
+      width: 100%;
+      background-color: #0f172a;
+      padding: 24px;
+      border-radius: 24px;
+      border: 1px solid #1e293b;
+      margin-top: 60px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      box-sizing: border-box;
+    }
+    .profile-img-container {
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      margin: -70px auto 0 auto;
+      padding: 4px;
+      background: linear-gradient(to top right, #22d3ee, #3b82f6, #4f46e5);
+      box-shadow: 0 10px 15px rgba(34, 211, 238, 0.2);
+    }
+    .profile-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid #0f172a;
+    }
+    h1 {
+      font-size: 28px;
+      font-weight: 800;
+      margin: 16px 0 4px 0;
+      color: #22d3ee;
+      letter-spacing: -0.5px;
+    }
+    .subtitle {
+      color: #22d3ee;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+    .bio-box {
+      text-align: left;
+      background-color: rgba(2, 6, 23, 0.4);
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(30, 41, 59, 0.6);
+      margin-bottom: 20px;
+    }
+    .section-title {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .bio-text {
+      color: #cbd5e1;
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .skills-container {
+      text-align: left;
+      margin-bottom: 24px;
+    }
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .skill-badge {
+      background-color: #020617;
+      color: #22d3ee;
+      padding: 6px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid #1e293b;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: white;
+      padding: 16px;
+      border-radius: 16px;
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+    .btn:active {
+      transform: scale(0.98);
+    }
+    .btn-insta {
+      background: linear-gradient(to right, #ec4899, #ef4444, #eab308);
+    }
+    .btn-wa {
+      background-color: #10b981;
+    }
+    .btn-link {
+      background-color: #0284c7;
+    }
+    .btn-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-align: left;
+    }
+    .btn-subtext {
+      display: block;
+      font-weight: 400;
+      font-size: 12px;
+      opacity: 0.8;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #64748b;
+      text-decoration: none;
+      margin-top: 8px;
+    }
+    .back-link:hover {
+      color: #22d3ee;
+    }
+  </style>
 </head>
-<body class="bg-slate-900 text-white min-h-screen flex flex-col items-center p-6">
+<body>
 
   <!-- Main Container -->
-  <div class="max-w-xl w-full bg-slate-800 p-8 rounded-2xl shadow-xl space-y-8 mt-10">
+  <div class="container">
     
+    <!-- Profile Image (Put your own image URL in src if needed) -->
+    <div class="profile-img-container">
+      <img src="IMAGE_URL_HERE" alt="Maheen Dev" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=maheen';">
+    </div>
+
     <!-- Header / Bio Section -->
-    <div class="text-center space-y-3">
-      <div class="w-24 h-24 bg-gradient-to-tr from-pink-500 to-violet-600 rounded-full mx-auto flex items-center justify-center text-2xl font-bold tracking-wider shadow-lg animate-pulse">
-        MD
-      </div>
-      <h1 class="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-        Maheen Dev
-      </h1>
-      <p class="text-cyan-400 font-medium text-sm tracking-wide uppercase">
-        Frontend Web Developer
-      </p>
-      <p class="text-slate-400 text-sm leading-relaxed">
-        Welcome to my portfolio! I love building responsive, beautiful, and user-friendly web applications using HTML and Tailwind CSS.
+    <h1>MAHEEN DEV</h1>
+    <div class="subtitle">Frontend Web Developer</div>
+    
+    <div class="bio-box">
+      <span class="section-title">Bio</span>
+      <p class="bio-text">
+        Welcome to Maheen369! I am a passionate frontend developer building light, fast, and responsive user interfaces.
       </p>
     </div>
 
-    <hr class="border-slate-700">
-
-    <!-- My Skills Section -->
-    <div class="space-y-4">
-      <h2 class="text-xl font-bold text-slate-200 flex items-center gap-2">
-        🚀 My Skills
-      </h2>
-      <div class="flex flex-wrap gap-2">
-        <span class="bg-slate-700 text-cyan-400 px-3 py-1.5 rounded-lg text-xs font-semibold tracking-wide border border-slate-600">HTML5</span>
-        <span class="bg-slate-700 text-cyan-400 px-3 py-1.5 rounded-lg text-xs font-semibold tracking-wide border border-slate-600">Tailwind CSS</span>
-        <span class="bg-slate-700 text-cyan-400 px-3 py-1.5 rounded-lg text-xs font-semibold tracking-wide border border-slate-600">Responsive Design</span>
-        <span class="bg-slate-700 text-cyan-400 px-3 py-1.5 rounded-lg text-xs font-semibold tracking-wide border border-slate-600">GitHub & Git</span>
-        <span class="bg-slate-700 text-cyan-400 px-3 py-1.5 rounded-lg text-xs font-semibold tracking-wide border border-slate-600">Mobile Development (Acode)</span>
+    <!-- Skills Section -->
+    <div class="skills-container">
+      <span class="section-title">Skills</span>
+      <div class="skills-grid">
+        <div class="skill-badge"><i class="fab fa-html5" style="color: #f97316;"></i> HTML5</div>
+        <div class="skill-badge"><i class="fab fa-css3-alt" style="color: #3b82f6;"></i> CSS3</div>
+        <div class="skill-badge"><i class="fab fa-js" style="color: #eab308;"></i> Tailwind</div>
+        <div class="skill-badge"><i class="fab fa-github" style="color: #fff;"></i> GitHub</div>
       </div>
     </div>
 
-    <hr class="border-slate-700">
+    <!-- Social Action Buttons -->
+    <div style="margin-top: 8px;">
+      <!-- Instagram Button -->
+      <a href="https://instagram.com" target="_blank" class="btn btn-insta">
+        <div class="btn-content">
+          <i class="fab fa-instagram" style="font-size: 20px;"></i>
+          <div>Instagram <span class="btn-subtext">@maheen_dev</span></div>
+        </div>
+        <i class="fas fa-chevron-right" style="opacity: 0.5; font-size: 12px;"></i>
+      </a>
 
-    <!-- Contact & Connect Section -->
-    <div class="space-y-4">
-      <h2 class="text-xl font-bold text-slate-200">
-        📬 Let's Connect
-      </h2>
-      <p class="text-slate-400 text-sm">
-        Feel free to reach out if you want to collaborate on a project or just say hi!
-      </p>
+      <!-- WhatsApp Button -->
+      <a href="https://wa.me/9112356350" target="_blank" class="btn btn-wa">
+        <div class="btn-content">
+          <i class="fab fa-whatsapp" style="font-size: 20px;"></i>
+          <div>WhatsApp <span class="btn-subtext">+91 12356350</span></div>
+        </div>
+        <i class="fas fa-chevron-right" style="opacity: 0.5; font-size: 12px;"></i>
+      </a>
       
-      <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-700 space-y-2 text-sm text-slate-300">
-        <div class="flex justify-between">
-          <span class="font-medium text-slate-400">GitHub:</span>
-          <a href="https://github.com/maheen369" target="_blank" class="text-cyan-400 hover:underline">github.com/maheen369</a>
+      <!-- LinkedIn Button -->
+      <a href="https://linkedin.com" target="_blank" class="btn btn-link">
+        <div class="btn-content">
+          <i class="fab fa-linkedin-in" style="font-size: 20px;"></i>
+          <div>LinkedIn <span class="btn-subtext">Connect Professionally</span></div>
         </div>
-        <div class="flex justify-between">
-          <span class="font-medium text-slate-400">Role:</span>
-          <span>Junior Frontend Developer</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Back to Main Card Button -->
-    <div class="pt-4">
-      <a href="index.html" class="block text-center text-xs font-medium text-slate-500 hover:text-cyan-400 transition-colors duration-200">
-        ← Back to Main Directory
+        <i class="fas fa-chevron-right" style="opacity: 0.5; font-size: 12px;"></i>
       </a>
     </div>
+
+    <!-- Footer Back Link -->
+    <a href="index.html" class="back-link">
+      <i class="fas fa-arrow-left" style="font-size: 10px;"></i> Back to Main Directory
+    </a>
 
   </div>
 
