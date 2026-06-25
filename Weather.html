@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App Pro - Custom Date</title>
+    <style>
+        body {
+            background: #222831;
+            color: #ffffff;
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: #393e46;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            width: 85%;
+            max-width: 400px;
+        }
+        .search-box {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+        .search {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .search input {
+            border: 0;
+            outline: 0;
+            background: #f0f0f0;
+            color: #333;
+            padding: 10px 15px;
+            height: 40px;
+            border-radius: 30px;
+            width: 70%; 
+            font-size: 14px;
+        }
+        .search button {
+            border: 0;
+            outline: 0;
+            background: #00adb5;
+            color: #fff;
+            padding: 0 15px;
+            height: 40px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            width: 25%; 
+        }
+        /* Date picker input styling */
+        .date-picker {
+            border: 0;
+            outline: 0;
+            background: #222831;
+            color: #00adb5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+        }
+        .weather {
+            margin-top: 25px;
+        }
+        .date-day {
+            font-size: 14px;
+            color: #00adb5;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .condition {
+            font-size: 18px;
+            color: #f0f0f0;
+            margin-top: -5px;
+            margin-bottom: 15px;
+            text-transform: capitalize;
+        }
+        .weather .temp {
+            font-size: 60px;
+            font-weight: 500;
+            margin: 0;
+        }
+        .weather .city {
+            font-size: 28px;
+            font-weight: 400;
+            margin-top: -5px;
+            margin-bottom: 20px;
+        }
+        .details {
+            display: flex;
+            flex-wrap: wrap; 
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1); 
+            padding-top: 20px;
+        }
+        .col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 50%; 
+            margin-bottom: 15px;
+        }
+        .col p {
+            margin: 0;
+            font-size: 13px;
+            color: #bbb;
+        }
+        .humidity, .wind, .sunset, .rain-chance {
+            font-size: 16px !important;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 3px !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="search-box">
+            <div class="search">
+                <input type="text" placeholder="Enter city name" id="cityInput">
+                <button id="btn">Search</button>
+            </div>
+            <!-- Calendar input jahan se aap date select kareingi -->
+            <input type="date" class="date-picker" id="myDatePicker">
+        </div>
+
+        <div class="weather">
+            <div class="date-day" id="dateDay">--</div>
+            
+            <h1 class="temp" id="temp">--°C</h1>
+            <div class="condition" id="condition">--</div>
+            <h2 class="city" id="city">Search a City</h2>
+
+            <div class="details">
+                <div class="col">
+                    <p class="humidity" id="humidity">--%</p>
+                    <p>Humidity</p>
+                </div>
+                <div class="col">
+                    <p class="wind" id="wind">-- km/h</p>
+                    <p>Wind Speed</p>
+                </div>
+                <div class="col">
+                    <p class="sunset" id="sunset">--:--</p>
+                    <p>Sunset</p>
+                </div>
+                <div class="col">
+                    <p class="rain-chance" id="rainChance">--%</p>
+                    <p>Rain Chance</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const inp = document.getElementById("cityInput");
+        const btn = document.getElementById("btn");
+        const datePicker = document.getElementById("myDatePicker");
+
+        // Aaj ki real date calendar me default set karne k liye
+        const todayDate = new Date().toISOString().split('T')[0];
+        datePicker.value = todayDate;
+
+        async function getWeatherData(cityName) {
+            if(!cityName) {
+                document.getElementById("city").innerHTML = "Naam likhein!";
+                return;
+            }
+
+            document.getElementById("city").innerHTML = "Dhoond raha hoon...";
+
+            try {
+                const res = await fetch(`https://wttr.in/${cityName}?format=j1`);
+                
+                if(!res.ok) {
+                    document.getElementById("city").innerHTML = "Nahi Mila Shahar!";
+                    return;
+                }
+
+                const myData = await res.json();
+                const currentCondition = myData.current_condition[0];
+                const weatherInfo = myData.weather[0]; 
+
+                const displayName = cityName.charAt(0).toUpperCase() + cityName.slice(1);
+                document.getElementById("city").innerHTML = displayName;
+                
+                document.getElementById("temp").innerHTML = currentCondition.temp_C + "°C";
+                document.getElementById("humidity").innerHTML = currentCondition.humidity + "%";
+                document.getElementById("wind").innerHTML = currentCondition.windspeedKmph + " km/h";
+                document.getElementById("condition").innerHTML = currentCondition.weatherDesc[0].value;
+                document.getElementById("sunset").innerHTML = weatherInfo.astronomy[0].sunset;
+                document.getElementById("rainChance").innerHTML = weatherInfo.hourly[0].chanceofrain + "%";
+
+                // --- CALENDAR SE SELECT KI HUI DATE SHOW KARNE K LIYE ---
+                const options = { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric' };
+                
+                // Jo date calendar me select hogi, ye wahi uthaye ga
+                const selectedDate = new Date(datePicker.value); 
+                
+                document.getElementById("dateDay").innerHTML = selectedDate.toLocaleDateString("en-US", options);
+
+            } catch (err) {
+                document.getElementById("city").innerHTML = "Internet Ka Masla!";
+                console.error(err);
+            }
+        }
+
+        document.getElementById("city").innerHTML = "Search a City";
+
+        btn.addEventListener("click", () => {
+            getWeatherData(inp.value.trim());
+        });
+
+        inp.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                getWeatherData(inp.value.trim());
+            }
+        });
+    </script>
+
+</body>
+</html>
